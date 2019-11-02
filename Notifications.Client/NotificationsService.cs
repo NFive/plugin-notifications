@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using NFive.Notifications.Client.Overlays;
@@ -40,20 +39,6 @@ namespace NFive.Notifications.Client
 			this.Comms.Event(NotificationsEvents.ShowNotification).FromClient().On<string, string, TimeSpan?>((e, text, type, timeout) =>
 			{
 				this.overlay.Notify(text, type, timeout);
-			});
-
-			// DEBUG CODE
-			this.Commands.On("n", a =>
-			{
-				var args = a.ToList();
-
-				if (!args.Any())
-				{
-					this.overlay.Notify("No arguments supplied to /n command!", "error");
-					return;
-				}
-
-				this.overlay.Notify(args[0], args.ElementAtOrDefault(1) ?? this.config.DefaultType);
 			});
 		}
 	}
