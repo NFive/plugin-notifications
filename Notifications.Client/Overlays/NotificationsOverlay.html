@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha256-soW/iAENd5uEBh0+aUIS1m2dK4K6qTcB9MLuOnWEQhw=" crossorigin="anonymous" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha256-ITwLtH5uF4UlWjZ0mdHOhPwDpLoqxzfFCZXn1wE56Ps=" crossorigin="anonymous"></script>
+
+		<style type="text/css">
+			html, body {
+				width: 100vw;
+				height: 100vh;
+				margin: 0;
+				overflow: hidden;
+				/*font-size: 10vh;*/
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+				user-select: none;
+				outline: none;
+				background-color: transparent;
+			}
+		</style>
+
+		<script>
+			nfive.on('ready', config => {
+				nfive.show();
+
+				Noty.setMaxVisible(config.queue);
+
+				Noty.overrideDefaults({
+					layout: config.layout,
+					theme: config.theme,
+					animation: {
+						open: `animated ${config.animationOpen}`,
+						close: `animated ${config.animationClose}`
+					},
+					type: config.type,
+					timeout: config.timeout
+				});
+			});
+
+			nfive.on('notify', n => new Noty(Object.entries(n).reduce((a, [k, v]) => (v === null ? a : { ...a, [k]: v }), {})).show());
+		</script>
+	</head>
+
+	<body></body>
+</html>
