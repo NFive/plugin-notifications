@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using NFive.Notifications.Client.Overlays;
@@ -30,15 +29,15 @@ namespace NFive.Notifications.Client
 			this.overlay = new NotificationsOverlay(this.OverlayManager, this.config);
 
 			// Listen to server notifications
-			this.Comms.Event(NotificationsEvents.ShowNotification).FromServer().On<string, string, TimeSpan?>((e, text, type, timeout) =>
+			this.Comms.Event(NotificationsEvents.ShowNotification).FromServer().On<Notification>((e, notification) =>
 			{
-				this.overlay.Notify(text, type, timeout);
+				this.overlay.Notify(notification);
 			});
 
 			// Listen to client notifications
-			this.Comms.Event(NotificationsEvents.ShowNotification).FromClient().On<string, string, TimeSpan?>((e, text, type, timeout) =>
+			this.Comms.Event(NotificationsEvents.ShowNotification).FromClient().On<Notification>((e, notification) =>
 			{
-				this.overlay.Notify(text, type, timeout);
+				this.overlay.Notify(notification);
 			});
 		}
 	}

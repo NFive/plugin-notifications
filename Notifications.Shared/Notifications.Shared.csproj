@@ -52,6 +52,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notification.cs" />
     <Compile Include="NotificationsEvents.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

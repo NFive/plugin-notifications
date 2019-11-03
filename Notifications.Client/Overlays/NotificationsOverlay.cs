@@ -1,4 +1,3 @@
-using System;
 using NFive.Notifications.Shared;
 using NFive.SDK.Client.Interface;
 
@@ -24,13 +23,13 @@ namespace NFive.Notifications.Client.Overlays
 			timeout = this.config.DefaultTimeout.TotalMilliseconds
 		};
 
-		public void Notify(string text, string type = null, TimeSpan? timeout = null)
+		public void Notify(Notification notification)
 		{
 			Emit("notify", new
 			{
-				text,
-				type,
-				timeout?.TotalMilliseconds
+				text = notification.Text,
+				type = notification.Type,
+				timeout = notification.Timeout?.TotalMilliseconds
 			});
 		}
 	}
